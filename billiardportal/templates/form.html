@@ -1,0 +1,44 @@
+<form method="post" action="{% url 'submit_form' %}" id="form-{{ form.prefix }}">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th class="l">Field</th>
+                <th class="r">Value</th>
+                <th class="r">Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+            <tr id="form-{{ form.prefix }}">
+                {% for field in form %}
+                    <tr>
+                        <td class="l">{{ field.label_tag }}</td>
+                        <td class="r">
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="error">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                <td class="r">
+                    <button
+                        type="button"
+                        hx-delete="{% url 'delete_form' %}" 
+                        hx-target="closest form"
+                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Submit</button>
+</form>

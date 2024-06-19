@@ -3,8 +3,8 @@ from core.models import Player
 
 class Tournament(models.Model):
     name = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
     attachment = models.FileField(upload_to='attachments/', blank=True, null=True)
     organizers = models.ManyToManyField(Player, related_name='organized_tournaments')
     players = models.ManyToManyField(Player, related_name='participating_tournaments')
@@ -26,7 +26,7 @@ class Match(models.Model):
     def __str__(self):
         return f"Match in {self.round.name}"
 
-class MatchPlayer(models.Model):
+class PlayerScore(models.Model):
     match = models.ForeignKey(Match, related_name='match_players', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, related_name='player_matches', on_delete=models.CASCADE)
     score = models.IntegerField()

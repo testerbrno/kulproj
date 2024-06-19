@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block main_space %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>{{ form.instance.id|yesno:"Update Tournament,Create Tournament" }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="l">Field</th>
+                <th class="r">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in form %}
+                <tr>
+                    <td class="l">{{ field.label_tag }}</td>
+                    <td class="r">{{ field }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan=2 class="l"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Save</button>
+</form>
+{% if errors %}
+<div class="errors">
+    <h2>Form Errors:</h2>
+    <ul>
+    {% for form_type, error_list in errors.items %}
+        <li><strong>{{ form_type }}</strong>: {{ error_list }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock main_space %}

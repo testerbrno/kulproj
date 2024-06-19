@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block main_space %}
+<h1>Tournament Detail</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="l">Field</th>
+                <th class="r">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="l">Name</td>
+                <td class="r">{{ tournament.name }}</td>
+            </tr>
+            <tr>
+                <td class="l">Start Date</td>
+                <td class="r">{{ tournament.start_date }}</td>
+            </tr>
+            <tr>
+                <td class="l">End Date</td>
+                <td class="r">{{ tournament.end_date }}</td>
+            </tr>
+            <tr>
+                <td class="l">Attachment</td>
+                <td class="r">
+                    {% if tournament.attachment %}
+                        <a href="{{ tournament.attachment.url }}">{{ tournament.attachment.name }}</a>
+                    {% else %}
+                        No attachment available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+{% endblock main_space %}

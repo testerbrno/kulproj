@@ -114,6 +114,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Custom date and time formats
+DATE_FORMAT = 'd.m.Y'            # Example: 19.06.2024
+TIME_FORMAT = 'H:i:s'            # Example: 14:30:59
+DATETIME_FORMAT = 'd.m.Y H:i:s'  # Example: 19.06.2024 14:30:59
+SHORT_DATE_FORMAT = 'd.m.Y'      # Example: 19.06.2024
+SHORT_DATETIME_FORMAT = 'd.m.Y H:i'  # Example: 19.06.2024 14:30
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
