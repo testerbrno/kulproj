@@ -1,10 +1,6 @@
 from django import forms
-from tournaments.models import (
-    Tournament,
-    Round,
-    Match,
-    PlayerScore
-)
+from django.forms import inlineformset_factory
+from tournaments.models import *
 
 class TournamentForm(forms.ModelForm):
     class Meta:
@@ -19,13 +15,23 @@ class RoundForm(forms.ModelForm):
     class Meta:
         model = Round
         fields = ['name', 'attachment', 'tournament']
+        widgets = {
+            'tournament': forms.Select(attrs={'readonly': 'readonly'}),
+        }
 
 class MatchForm(forms.ModelForm):
     class Meta:
         model = Match
-        fields = ['round']
+        fields = ['round', 'referee']
+        widgets = {
+            'round': forms.Select(attrs={'readonly': 'readonly'}),
+        }
 
 class PlayerScoreForm(forms.ModelForm):
     class Meta:
         model = PlayerScore
         fields = ['match', 'player', 'score']
+        widgets = {
+            'match': forms.Select(attrs={'readonly': 'readonly'}),
+        }
+

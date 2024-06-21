@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block main_space %}
+<h1>Match List for {{ object_list.0.round }}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Referee</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in object_list %}
+        <tr>
+            <td>
+                {% if match.referee.exists %}
+                    <ul>
+                        {% for referee in match.referee.all %}
+                            <li>{{ referee.username }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    No referees assigned
+                {% endif %}
+            </td>
+            <td><a href="{% url 'match_detail' tournament.id round.id match.id %}">View</a>
+                &nbsp;
+                <a href="{% url 'match_update' tournament.id round.id match.id  %}">Edit</a></td>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock main_space %}

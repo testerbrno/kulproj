@@ -1,10 +1,43 @@
+{% url 'tournament_create' as tournament_create_url %}
+
 <nav>
     {% if tournament %}
-    <ul>
-        <li><a href="{% url 'tournament_detail' tournament.id %}">{{ tournament.name }}</a></li>
-        {% for round in rounds %}
-            <li><a href="{% url 'round_detail' tournament.id round.id %}">{{ round.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2"><a href="{% url 'tournament_detail' tournament.id %}">{{ tournament.name }}</a></td>
+            </tr>
+            {% for round_item in rounds %}
+                <tr>
+                    <td colspan="2"><a href="{% url 'round_detail' tournament.id round_item.id %}">{{ round_item.name }}</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'match_list' tournament.id round_item.id %}"><button class="button-68" type="button">Match list</button></a></td>
+                    <td><a href="{% url 'match_create' tournament.id round_item.id %}"><button class="button-68" type="button">Create Match</button></a></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2">
+                    <a href="{% url 'round_create' tournament.id %}">
+                        <button class="button-68" type="button">Create Round</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+    
+    {% if not tournament and request.path != tournament_create_url %}
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="{{ tournament_create_url }}">
+                        <button class="button-68" type="button">Create Tournament</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     {% endif %}
 </nav>

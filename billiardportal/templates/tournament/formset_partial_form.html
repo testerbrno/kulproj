@@ -1,15 +1,9 @@
-{% extends "base.html" %}
 
-{% block main_space %}
-{% comment %} <form method="post" action="{% url 'submit_form' %}" id="form-{{ form.prefix }}"> {% endcomment %}
-<form method="post" id="form-{{ form.prefix }}">
-    {% csrf_token %}
     <table>
         <thead>
             <tr>
                 <th class="l">Field</th>
                 <th class="r">Value</th>
-                {% comment %} <th class="r">Action</th> {% endcomment %}
             </tr>
         </thead>
         <tbody>
@@ -18,7 +12,7 @@
                     {{ form.non_field_errors }}
                 </div>
             {% endif %}
-            <tr>
+            <tr id="form-{{ form.prefix }}">
                 {% for field in form %}
                     <tr>
                         <td class="l">{{ field.label_tag }}</td>
@@ -35,11 +29,3 @@
             </tr>
         </tbody>
     </table>
-    <button class="button-68"type="submit">Submit</button>
-    <button
-    class="button-68"
-    type="button" onclick="window.history.back()">
-        Go Back
-    </button>
-</form>
-{% endblock main_space %}

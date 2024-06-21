@@ -22,6 +22,7 @@ class Round(models.Model):
 
 class Match(models.Model):
     round = models.ForeignKey(Round, related_name='matches', on_delete=models.CASCADE)
+    referee = models.ManyToManyField(Player, related_name='refereed_matches')
 
     def __str__(self):
         return f"Match in {self.round.name}"
@@ -29,7 +30,7 @@ class Match(models.Model):
 class PlayerScore(models.Model):
     match = models.ForeignKey(Match, related_name='match_players', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, related_name='player_matches', on_delete=models.CASCADE)
-    score = models.IntegerField()
+    score = models.IntegerField(default=0, null=False)
 
     class Meta:
         unique_together = ('match', 'player')

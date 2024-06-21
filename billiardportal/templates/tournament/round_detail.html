@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block main_space %}
+<h1>Round Detail</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="l">Field</th>
+                <th class="r">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="l">Name</td>
+                <td class="r">{{ round.name }}</td>
+            </tr>
+            <tr>
+                <td class="l">Tournament</td>
+                <td class="r">{{ round.tournament.name }}</td>
+            </tr>
+            <tr>
+                <td class="l">Attachment</td>
+                <td class="r">
+                    {% if round.attachment %}
+                        <a href="{{ round.attachment.url }}">{{ round.attachment.name }}</a>
+                    {% else %}
+                        No attachment available
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock main_space %}
