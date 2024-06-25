@@ -164,9 +164,24 @@ class MatchListView(ContextMixin, ListView):
         
         return queryset
 
-class TournamentListView(ContextMixin, ListView):
+class TournamentListView(ListView):
     model = Tournament
     context_object_name = 'tournaments'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.GET.get('name')
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if start_date:
+            queryset = queryset.filter(start_date__gte=start_date)
+        if end_date:
+            queryset = queryset.filter(end_date__lte=end_date)
+
+        return queryset
 
 class RoundListView(ContextMixin, ListView):
     model = Round

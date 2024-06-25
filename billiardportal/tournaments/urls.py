@@ -6,6 +6,7 @@ from tournaments.views import *
 
 urlpatterns = [
     path('', TournamentListView.as_view(template_name="./tournament/tournament_list.html"), name='tournament_list'),
+    path('filter/', TournamentListView.as_view(template_name="./tournament/tournament_list_short.html"), name='tournament_shortlist'),
     path('<int:tournament_pk>/round/', RoundListView.as_view(template_name="./tournament/round_list.html"), name='round_list'),
     path('<int:tournament_pk>/<int:round_pk>/match/', MatchListView.as_view(template_name="./tournament/match_list.html"), name='match_list'),
     path('<int:tournament_pk>/', TournamentDetailView.as_view(template_name="./tournament/tournament_detail.html"), name='tournament_detail'),
