@@ -14,7 +14,7 @@
 
 {% if user.is_authenticated %}
     <p>Logged user: {{ user.username }}</p>
-    <form method="post" action="{% url 'logout' %}">
+    <form method="post" action="{% url 'logout' %}?next={% url 'tournament_list' %}">
         {% csrf_token %}
         <button class="button-68" type="submit">Logout</button>
     </form>

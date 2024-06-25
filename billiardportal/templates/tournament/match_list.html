@@ -7,6 +7,7 @@
         <tr>
             <th>Referee</th>
             <th>Details</th>
+            <th>Player Scores</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +24,21 @@
                     No referees assigned
                 {% endif %}
             </td>
-            <td><a href="{% url 'match_detail' tournament.id round.id match.id %}">View</a>
+            <td>
+                <a href="{% url 'match_detail' tournament.id round.id match.id %}">View</a>
+                {% if user.is_authenticated %}
                 &nbsp;
-                <a href="{% url 'match_update' tournament.id round.id match.id  %}">Edit</a></td>
+                <a href="{% url 'match_update' tournament.id round.id match.id  %}">Edit</a>
+                &nbsp;
+                <a href="{% url 'playerscore_update' tournament.id round.id match.id  %}">Players</a>
+                {% endif %}
+            </td>
+            <td>
+                <ul>
+                    {% for score in match.match_players.all %}
+                        <li>{{ score.player.username }}: {{ score.score }}</li>
+                    {% endfor %}
+                </ul>
             </td>
         </tr>
         {% endfor %}

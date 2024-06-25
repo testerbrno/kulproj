@@ -17,7 +17,12 @@
             <td>{{ tournament.name }}</td>
             <td>{{ tournament.start_date }}</td>
             <td>{{ tournament.end_date }}</td>
-            <td><a href="{% url 'tournament_detail' tournament.pk %}">View</a></td>
+            <td><a href="{% url 'tournament_detail' tournament.pk %}">View</a>
+                {% if user.is_authenticated %}
+                &nbsp;
+                <a href="{% url 'tournament_update' tournament.pk %}">Edit</a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

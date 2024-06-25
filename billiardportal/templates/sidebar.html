@@ -1,21 +1,33 @@
 {% url 'tournament_create' as tournament_create_url %}
 
+{% if 'update' in request.path %}
+    {% url 'tournament_update' tournament.id as tournament_url %}
+{% else %}
+    {% url 'tournament_detail' tournament.id as tournament_url %}
+{% endif %}
+
 <nav>
     {% if tournament %}
     <table>
         <tbody>
             <tr>
-                <td colspan="2"><a href="{% url 'tournament_detail' tournament.id %}">{{ tournament.name }}</a></td>
+                <td colspan="2"><a href="{{ tournament_url }}">{{ tournament.name }}</a></td>
             </tr>
             {% for round_item in rounds %}
+                {% if 'update' in request.path %}
+                    {% url 'roundmatch_update' tournament.id round_item.id as round_url %}
+                {% else %}
+                    {% url 'round_detail' tournament.id round_item.id as round_url %}
+                {% endif %}
                 <tr>
-                    <td colspan="2"><a href="{% url 'round_detail' tournament.id round_item.id %}">{{ round_item.name }}</a></td>
+                    <td colspan="2"><a href="{{ round_url }}">{{ round_item.name }}</a></td>
                 </tr>
                 <tr>
                     <td><a href="{% url 'match_list' tournament.id round_item.id %}"><button class="button-68" type="button">Match list</button></a></td>
-                    <td><a href="{% url 'match_create' tournament.id round_item.id %}"><button class="button-68" type="button">Create Match</button></a></td>
+                    {% if user.is_authenticated %}<td><a href="{% url 'match_create' tournament.id round_item.id %}"><button class="button-68" type="button">Create Match</button></a></td>{% endif %}
                 </tr>
             {% endfor %}
+            {% if user.is_authenticated %}
             <tr>
                 <td colspan="2">
                     <a href="{% url 'round_create' tournament.id %}">
@@ -23,11 +35,12 @@
                     </a>
                 </td>
             </tr>
+            {% endif %}
         </tbody>
     </table>
     {% endif %}
     
-    {% if not tournament and request.path != tournament_create_url %}
+    {% if not tournament and request.path != tournament_create_url and user.is_authenticated %}
     <table>
         <tbody>
             <tr>

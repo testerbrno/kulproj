@@ -17,11 +17,13 @@ urlpatterns = [
 
     # URL patterns for creating and updating rounds
     path('<int:tournament_pk>/round/create/', RoundCreateView.as_view(template_name="./form.html"), name='round_create'),
-    # path('<int:tournament_pk>/<int:round_pk>/update/', RoundUpdateView.as_view(template_name="./update/round_update.html"), name='round_update'),
+    path('<int:tournament_pk>/<int:round_pk>/update/', RoundUpdateView.as_view(template_name="./tournament/round_update.html"), name='round_update'),
+    path('<int:tournament_pk>/<int:round_pk>/update_with_matches/', RoundMatchUpdateView.as_view(template_name="./tournament/round_update_match_list.html"), name='roundmatch_update'),
     path('<int:tournament_pk>/<int:round_pk>/match/create/', MatchCreateView.as_view(template_name="./form.html"), name='match_create'),
     path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/', MatchDetailView.as_view(template_name="./tournament/match_detail.html"), name='match_detail'),
     path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/update/', MatchUpdateView.as_view(template_name="./form.html"), name='match_update'),
     path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/playerscore/create/', PlayerScoreCreateView.as_view(template_name="./tournament/playerscore.html"), name='playerscore_create'),
+    path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/playerscore/update/', PlayerScoreUpdateView.as_view(template_name="./tournament/playerscore.html"), name='playerscore_update'),
     # path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/<str:form_class>/create/', MatchPlayerCreateView.as_view(template_name="./create/match_player_form.html"), name='matchplayer_create'),
     # path('<int:tournament_pk>/<int:round_pk>/<int:match_pk>/<int:matchplayer_pk>/update/', MatchPlayerUpdateView.as_view(template_name='./update/match_player_update.html'), name='matchplayer_update'),
 

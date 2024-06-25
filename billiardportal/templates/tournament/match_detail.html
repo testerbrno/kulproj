@@ -32,6 +32,16 @@
                 {% endif %}
             </td>
         </tr>
+        <tr>
+            <td class="l">Player Scores</td>
+            <td class="r">
+                <ul>
+                    {% for score in playerscores %}
+                        <li>{{ score.player.username }}: {{ score.score }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
     </tbody>
 </table>
 {% endblock main_space %}

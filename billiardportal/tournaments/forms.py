@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import inlineformset_factory
+from django.forms import modelformset_factory
 from tournaments.models import *
 
 class TournamentForm(forms.ModelForm):
@@ -35,3 +35,4 @@ class PlayerScoreForm(forms.ModelForm):
             'match': forms.Select(attrs={'readonly': 'readonly'}),
         }
 
+PlayerScoreFormSet = modelformset_factory(PlayerScore, form=PlayerScoreForm, extra=2)

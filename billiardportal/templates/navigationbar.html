@@ -1,7 +1,10 @@
 <div>
 <ul>
-    <li>Tournaments</li>
-    <li>Players</li>
+    <li><a href="{% url 'tournament_list' %}">Tournaments</a></li>
+    <li><a href="{% url 'player_list' %}">Players</a></li>
+    {% if not user.is_authenticated %}
+    <li><a href="{% url 'player_create' %}">Register</a></li>
+    {% endif %}
 </ul>
 </div>
 <div>

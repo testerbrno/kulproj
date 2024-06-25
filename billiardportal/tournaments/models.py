@@ -33,7 +33,9 @@ class PlayerScore(models.Model):
     score = models.IntegerField(default=0, null=False)
 
     class Meta:
-        unique_together = ('match', 'player')
+        constraints = [
+            models.UniqueConstraint(fields=['match', 'player'], name='unique_match_player')
+        ]
 
     def __str__(self):
         return f"{self.player.username} in {self.match} with score {self.score}"

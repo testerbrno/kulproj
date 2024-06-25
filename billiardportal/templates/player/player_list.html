@@ -22,8 +22,10 @@
             <td>{% if player.is_active %}Yes{% else %}No{% endif %}</td>
             <td>{{ player.date_joined }}</td>
             <td><a href="{% url 'player_detail' player.pk %}">View</a>
+                {% if user.is_authenticated %}
                 &nbsp;
                 <a href="{% url 'player_update' player.pk %}">Edit</a></td>
+                {% endif %}
         </tr>
         {% endfor %}
     </tbody>
