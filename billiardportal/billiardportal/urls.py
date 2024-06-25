@@ -22,6 +22,9 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('login/', TemplateView.as_view(template_name="about.html"), name='about'),
+    path('privacy/', TemplateView.as_view(template_name="privacy_policy.html"), name='privacy'),
+    path('copyright/', TemplateView.as_view(template_name="copyright.html"), name='copyright'),
     path('admin/', admin.site.urls),
     path('login/', CustomLoginView.as_view(template_name="login.html"), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
@@ -30,4 +33,4 @@ urlpatterns = [
 ]
 
 admin.site.site_header = "BilliardPortal administration"
-admin.site.index_title = "Administration Portal"
+admin.site.index_title = "Administration BilliardPortal"

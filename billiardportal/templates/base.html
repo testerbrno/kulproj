@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-    <title>Billiard charts</title>
+    <title>BilliardPortal</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
@@ -17,6 +17,9 @@
     </div>
     <div class="mainspace">
         {% block main_space %}{% endblock main_space %}
+    </div>
+    <div class="footer">
+        {% include "footer.html" %}
     </div>
 </body>
 </html>
